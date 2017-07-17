@@ -57,6 +57,8 @@ void Point::setXY(std::pair<int, int> xy_Cols)
     }
     catch (const boost::bad_lexical_cast& e) {
         std::cout << "Exception Caught: " << e.what() << std::endl;
+        std::cout << "x: " << this->pointData.childData.at(xy_Cols.first) << std::endl;
+        std::cout << "x: " << this->pointData.childData.at(xy_Cols.second) << std::endl;
     }
     auto xyPair = std::make_pair(x,y);
     this->xy = xyPair;
@@ -91,6 +93,7 @@ void Point::printPointAttributes()
     //at the moment this will not be human readable until we port to user interface
     //my idea is for user to be able to click on point which will give data
     //can also give flexibility for query language implementations.
+    
     for (const auto& t : this->pointData.headers) {
         std::cout << t << '\t';
     }
@@ -98,4 +101,8 @@ void Point::printPointAttributes()
     for (const auto& t : this->pointData.childData) {
         std::cout << t << '\t';
     }
+    /*
+    auto calcDAT = this->getXY();
+    std::cout << calcDAT.first << "\t" << calcDAT.second << std::endl;
+    */
 }

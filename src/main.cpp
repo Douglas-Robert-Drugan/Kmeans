@@ -70,7 +70,6 @@ int main(int argc, char *argv[]) {
     //instantiated new auto loop below to iterate through points in vector and set xy
     for (auto&& v : p) {
         v->setXY(xyCol);
-        //v->printPointAttributes();    //debug
     }
 
     return 0;
