@@ -82,7 +82,7 @@ void Point::setData(std::string dLine)
     utils nUtility;
     for (auto&& p : tokenizer) {
         std::string h = nUtility.removeTrailingZeros(p);
-        this->pointData.childData.push_back(p);
+        this->pointData.childData.push_back(h);
     }
 }
 
