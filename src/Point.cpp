@@ -58,7 +58,7 @@ void Point::setXY(std::pair<int, int> xy_Cols)
     catch (const boost::bad_lexical_cast& e) {
         std::cout << "Exception Caught: " << e.what() << std::endl;
         std::cout << "x: " << this->pointData.childData.at(xy_Cols.first) << std::endl;
-        std::cout << "x: " << this->pointData.childData.at(xy_Cols.second) << std::endl;
+        std::cout << "y: " << this->pointData.childData.at(xy_Cols.second) << std::endl;
     }
     auto xyPair = std::make_pair(x,y);
     this->xy = xyPair;
