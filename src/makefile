@@ -2,20 +2,20 @@ CXX = g++
 CXXFLAGS = -g -std=c++11
 MPFLAGS = -lm -fopenmp
 
-#OBJS = 
-SRCS = main.cpp
-#HEADERS = 
+OBJS = main.o Point.o
+SRCS = main.cpp Point.cpp
+HEADERS = Point.hpp
 
 all: main
 
-main: $(SRCS)
+main: $(SRCS) $(HEADERS)
 		$(CXX) $(CXXFLAGS) $(SRCS) -o kmeansclustering $(MPFLAGS)
 
 #testSuite.o: testSuite.cpp
 #		$(CXX) $(CXXFLAGS) testSuite.cpp
 	   
-#Point.o: Point.cpp
-#		$(CXX) $(CXXFLAGS) Point.cpp
+Point.o: Point.cpp
+		$(CXX) $(CXXFLAGS) Point.cpp
 
 #Cluster.o: Cluster.cpp
 #		$(CXX) $(CXXFLAGS) Cluster.cpp

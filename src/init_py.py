@@ -5,19 +5,25 @@
 import csv
 import os
 
-
-def init_Program(filename, x, y, numLines, xCol, yCol, totalHeaderCount):
+def init_Program(filename, x, y, numLines, xCol, yCol):
     cmd = "make"
     os.system(cmd)
-    cmd = "./kmeansclustering " + filename + " " + x + " " + y + " " + str(numLines) + " " + str(xCol) + " " + str(yCol) + " " + str(totalHeaderCount)
+    cmd = "./kmeansclustering " + filename + " " + x + " " + y + " " + str(numLines) + " " + str(xCol) + " " + str(yCol)
     os.system(cmd)
 
     
-def parse(filename, x, y, xCol, yCol, totalHeaderCount):
-    cmd = "wc -l <" + filename
-    numLines = int(os.popen(cmd).read()[:-1])
-    print numLines
-    init_Program(filename, x, y, numLines, xCol, yCol, totalHeaderCount)
+def parse(filename, x, y, xCol, yCol):
+    f = open(filename, "rU")
+    reader = csv.reader(f)
+    rc = sum(1 for each in reader)
+    f.seek(0)   #reposition
+    #subtract header
+    rc = rc - 1
+    #df = pd.Series(d).to_frame('rows')
+    #cmd = "wc -l <" + filename
+    #numLines = int(os.popen(cmd).read()[:-1])
+    print rc    #commented out wc -l... huge performance hit but now works with universal line endings
+    init_Program(filename, x, y, rc, xCol, yCol)
     
     
 def user_params():
@@ -38,7 +44,6 @@ def user_params():
         reader = csv.reader(f)
         headers = reader.next()
         count = 0
-        totalHeaderCount = 0
         for i in headers:
             if x == i:
                 xCol = count
@@ -47,14 +52,13 @@ def user_params():
                 inpFlag[1] = True
                 yCol = count
             count=count+1
-            totalHeaderCount = totalHeaderCount + 1
         if inpFlag[0] == False or inpFlag[1] == False:
             inpFlag[0] = False 
             inpFlag[1] = False
             print "error, one of the specified fields does not exist"
     print xCol      # to get x Col to save
     print yCol      # to get y Col to save
-    parse(filename, x, y, xCol, yCol, totalHeaderCount)
+    parse(filename, x, y, xCol, yCol)
 
     
 user_params()
