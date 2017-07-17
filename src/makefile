@@ -17,7 +17,7 @@ main: $(SRCS)
 #Point.o: Point.cpp
 #		$(CXX) $(CXXFLAGS) Point.cpp
 
-#Cluster.o: Cluster.cpp
+#Cluster.o: Cluster.cpp Cluster.hpp
 #		$(CXX) $(CXXFLAGS) Cluster.cpp
 	  
 #Kmeans.o: Kmeans.cpp

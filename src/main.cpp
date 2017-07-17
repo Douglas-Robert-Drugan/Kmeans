@@ -2,7 +2,6 @@
  * Kmeans clustering main file
  */
 
-#include <vector>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -62,11 +61,12 @@ int main(int argc, char *argv[]) {
 
             for (const auto &t : tokenizer){
                 if (count == xCol){
-                    std::cout << t << "\t";
+                    std::cout << t << "\t";                 // remove later
                     try {
                         xx.bounded_push(lexical_cast<double>(t));
                     }
                     catch (const bad_lexical_cast& e){
+                        std::cout << typeid(t).name() << "\n";
                         std::cout << "Exception: " << e.what() << "\n";
                     }
                 }
@@ -76,6 +76,7 @@ int main(int argc, char *argv[]) {
                         yy.bounded_push(lexical_cast<double>(t));
                     }
                     catch (const bad_lexical_cast& e) {
+                        std::cout << typeid(t).name() << "\n";
                         std::cout << "Exception: " << e.what() << "\n";
                     }
                 }
