@@ -12,8 +12,10 @@
 #include <boost/tokenizer.hpp>
 #include <boost/lockfree/queue.hpp>
 #include "Point.hpp"
+#include "utils.hpp"
 //#include <omp.h>
 //#define NUMT 2
+
 
 int main(int argc, char *argv[]) {
     /*
@@ -49,15 +51,16 @@ int main(int argc, char *argv[]) {
 
     //switch to lockfree queue when bugs are fixed
     std::vector<Point*> p;
-
+    utils nUtility;
     std::ifstream inputFile(argv[1]);
     if (inputFile.is_open()) {
         std::string headerLine;			//create variable for header line
-        std::getline(inputFile, headerLine);	//getline to remove header line in .csv
+        nUtility.safeGetline(inputFile, headerLine);	//getline to remove header line in .csv
         std::string line;
         int pointID = 0;
+        
         //#pragma omp parallel for default(none)
-        while (std::getline(inputFile, line)) {
+        while (!nUtility.safeGetline(inputFile, line).eof()) {
             Point *ptr = new Point(pointID, headerLine, line);
             p.emplace_back(ptr);
             pointID++;
@@ -67,6 +70,7 @@ int main(int argc, char *argv[]) {
     //instantiated new auto loop below to iterate through points in vector and set xy
     for (auto&& v : p) {
         v->setXY(xyCol);
+        //v->printPointAttributes();    //debug
     }
 
     return 0;

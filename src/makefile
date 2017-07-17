@@ -2,9 +2,9 @@ CXX = g++
 CXXFLAGS = -g -std=c++11
 MPFLAGS = -lm -fopenmp
 
-OBJS = main.o Point.o
-SRCS = main.cpp Point.cpp
-HEADERS = Point.hpp
+OBJS = main.o Point.o utils.o
+SRCS = main.cpp Point.cpp utils.cpp
+HEADERS = Point.hpp utils.hpp
 
 all: main
 
@@ -17,6 +17,9 @@ main: $(SRCS) $(HEADERS)
 Point.o: Point.cpp
 		$(CXX) $(CXXFLAGS) Point.cpp
 
+utils.o: utils.cpp
+		$(CXX) $(CXXFLAGS) utils.cpp
+        
 #Cluster.o: Cluster.cpp
 #		$(CXX) $(CXXFLAGS) Cluster.cpp
 	  

@@ -9,6 +9,7 @@
 #include <utility>
 #include <vector>
 #include <string>
+#include "utils.hpp"
 
 #ifndef PONT_HPP
 #define POINT_HPP

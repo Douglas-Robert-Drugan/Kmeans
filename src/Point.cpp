@@ -67,8 +67,10 @@ void Point::setHeaders(std::string hLine)
     typedef boost::escaped_list_separator<char> Separator;
     typedef boost::tokenizer<Separator> Tokenizer;
     Tokenizer tokenizer(hLine);
+    utils nUtility;
     for (auto&& p : tokenizer) {
-        this->pointData.headers.push_back(p);
+        std::string h = nUtility.removeTrailingZeros(p);
+        this->pointData.headers.push_back(h);
     }
 }
 
@@ -77,7 +79,9 @@ void Point::setData(std::string dLine)
     typedef boost::escaped_list_separator<char> Separator;
     typedef boost::tokenizer<Separator> Tokenizer;
     Tokenizer tokenizer(dLine);
+    utils nUtility;
     for (auto&& p : tokenizer) {
+        std::string h = nUtility.removeTrailingZeros(p);
         this->pointData.childData.push_back(p);
     }
 }
