@@ -1,6 +1,8 @@
 /*
  *   Point HPP interface file for implementation in Point.cpp
  */
+#ifndef PONT_HPP
+#define POINT_HPP
 
 #include <boost/lockfree/queue.hpp>
 #include <boost/tokenizer.hpp>
@@ -10,9 +12,6 @@
 #include <vector>
 #include <string>
 #include "utils.hpp"
-
-#ifndef PONT_HPP
-#define POINT_HPP
 
 class Point {
 private:
@@ -27,7 +26,7 @@ private:
 public:
     //reassign point may be trivial as we can get/set the point in other class
     //constructor
-    Point(int, std::string, std::string);
+    Point(int, std::string, std::string, std::pair<int, int>);
     //need trivial copy constructor for non locking objs
     //Point(const Point &pObj);   //copy constructor fix implementation for parallel
     //need trivial destructor

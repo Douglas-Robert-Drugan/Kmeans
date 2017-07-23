@@ -1,10 +1,11 @@
 #include "Point.hpp"
 
-Point::Point(int pid, std::string headerLine, std::string line)
+Point::Point(int pid, std::string headerLine, std::string line, std::pair<int,int> xyCols)
 {
     this->point_id = pid;
     this->setHeaders(headerLine);
     this->setData(line);
+    this->setXY(xyCols);
 }
 
 // fix for parallel pushing... 

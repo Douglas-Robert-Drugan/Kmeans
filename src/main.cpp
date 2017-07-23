@@ -11,7 +11,7 @@
 #include <atomic>
 #include <boost/tokenizer.hpp>
 #include <boost/lockfree/queue.hpp>
-#include "Point.hpp"
+#include "Kmeans.hpp"
 #include "utils.hpp"
 //#include <omp.h>
 //#define NUMT 2
@@ -41,6 +41,8 @@ int main(int argc, char *argv[]) {
     auto numLines = std::stoi(argv[4]);
     std::pair <int, int> xy;
     auto xyCol = std::make_pair(std::stoi(argv[5]), std::stoi(argv[6]));
+    auto num_clusters = std::stoi(argv[7]);
+    auto num_iters = std::stoi(argv[8]);
 
     fprintf(stdout, "%d\n%d\n", xyCol.first, xyCol.second);
 
@@ -61,16 +63,18 @@ int main(int argc, char *argv[]) {
         
         //#pragma omp parallel for default(none)
         while (!nUtility.safeGetline(inputFile, line).eof()) {
-            Point *ptr = new Point(pointID, headerLine, line);
+            Point *ptr = new Point(pointID, headerLine, line, xyCol);
             p.emplace_back(ptr);
             pointID++;
         }
     }
-    //DEBUG: Task Scheduler performing out of order operations in read from csv while loop
-    //instantiated new auto loop below to iterate through points in vector and set xy
-    for (auto&& v : p) {
-        v->setXY(xyCol);
-    }
+    
+    //create clusters for #of clusters by creating kmeans obj
+    Kmeans *K = new Kmeans(num_clusters, num_iters);
+    K->run_Kmeans(p);
+    K->printResults();
+
+    delete K;
 
     return 0;
 }
