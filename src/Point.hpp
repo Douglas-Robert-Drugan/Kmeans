@@ -1,7 +1,7 @@
 /*
  *   Point HPP interface file for implementation in Point.cpp
  */
-#ifndef PONT_HPP
+#ifndef POINT_HPP
 #define POINT_HPP
 
 #include <boost/lockfree/queue.hpp>
