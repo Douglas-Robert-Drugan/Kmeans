@@ -294,11 +294,11 @@ void Kmeans::printResults(std::vector<Point*> points)
         std::cout << " Centroid " << ct << ": " << "ID:" << p-> getClusterID() << "\t" << p->getCentroid().first << "\t" << p->getCentroid().second << std::endl;
         ct++;
     }
-    std::cout << "**POINT DATA**" << std::endl;
-    for (const auto& p : points) {
-        std::cout << "Point Cluster ID: " << p->getClusterId(); 
-        std::cout << "\t" << "X: " << p->getXY().first << "\t" << "Y: " << p->getXY().second << std::endl;
-    }
+    //std::cout << "**POINT DATA**" << std::endl;
+    //for (const auto& p : points) {
+    //    std::cout << "Point Cluster ID: " << p->getClusterId(); 
+    //    std::cout << "\t" << "X: " << p->getXY().first << "\t" << "Y: " << p->getXY().second << std::endl;
+    //}
 }
 
 /***********************************************************************************
