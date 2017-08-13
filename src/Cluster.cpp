@@ -18,9 +18,12 @@ Cluster::Cluster(int n) {
 
 Cluster::~Cluster()
 {
+<<<<<<< HEAD
     for (auto&& p : this->clusterPoints) {
         delete p;
     }
+=======
+>>>>>>> 454c708bffdbf0efd1ff19fbb638e4dbca06779b
 }
 
 void Cluster::setClusterID(int id)
@@ -81,5 +84,8 @@ std::pair<double, double> Cluster::getCentroid() const {
 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 454c708bffdbf0efd1ff19fbb638e4dbca06779b
