@@ -5,14 +5,16 @@
 import csv
 import os
 
-def init_Program(filename, x, y, numLines, xCol, yCol):
+def init_Program(filename, x, y, numLines, xCol, yCol, clusters, iters):
     cmd = "make"
     os.system(cmd)
-    cmd = "./kmeansclustering " + filename + " " + x + " " + y + " " + str(numLines) + " " + str(xCol) + " " + str(yCol)
-    os.system(cmd)
+    sep = " "
+    seq = ("./kmeansclustering", filename, x, y, str(numLines), str(xCol), str(yCol), str(clusters), str(iters))
+    #print sep.join(seq)
+    os.system(sep.join(seq))
 
     
-def parse(filename, x, y, xCol, yCol):
+def parse(filename, x, y, xCol, yCol, clusters, iters):
     f = open(filename, "rU")
     reader = csv.reader(f)
     rc = sum(1 for each in reader)
@@ -23,7 +25,7 @@ def parse(filename, x, y, xCol, yCol):
     #cmd = "wc -l <" + filename
     #numLines = int(os.popen(cmd).read()[:-1])
     print rc    #commented out wc -l... huge performance hit but now works with universal line endings
-    init_Program(filename, x, y, rc, xCol, yCol)
+    init_Program(filename, x, y, rc, xCol, yCol, clusters, iters)
     
     
 def user_params():
@@ -56,9 +58,25 @@ def user_params():
             inpFlag[0] = False 
             inpFlag[1] = False
             print "error, one of the specified fields does not exist"
+    flag = False
+    while flag == False:
+        flag = True
+        num_clusters = raw_input("Input number of clusters: ")
+        num_iter = raw_input("Input number of iterations: ")
+        try:
+            int(num_clusters)
+        except ValueError:
+            flag = False
+            print "Please enter an integer for number of clusters"
+        try:
+            int(num_iter)
+        except ValueError:
+            flag = False
+            print "Please enter an integer for number of iterations."
+          
     print xCol      # to get x Col to save
     print yCol      # to get y Col to save
-    parse(filename, x, y, xCol, yCol)
+    parse(filename, x, y, xCol, yCol, num_clusters, num_iter)
 
     
 user_params()

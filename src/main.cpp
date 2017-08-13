@@ -11,7 +11,7 @@
 #include <atomic>
 #include <boost/tokenizer.hpp>
 #include <boost/lockfree/queue.hpp>
-#include "Point.hpp"
+#include "Kmeans.hpp"
 #include "utils.hpp"
 //#include <omp.h>
 //#define NUMT 2
@@ -29,20 +29,22 @@ int main(int argc, char *argv[]) {
 
     /*
     * DEBUG
-    */
+
     fprintf(stdout, "%d arguments.\n", argc - 1);
     for (int i = 0; i < argc - 1; i++) {
         int ct = i + 1;
         std::cout << ct << "st argument: " << argv[ct] << std::endl;
     }
-
+    */
     auto x = argv[2];
     auto y = argv[3];
     auto numLines = std::stoi(argv[4]);
     std::pair <int, int> xy;
     auto xyCol = std::make_pair(std::stoi(argv[5]), std::stoi(argv[6]));
+    auto num_clusters = std::stoi(argv[7]);
+    auto num_iters = std::stoi(argv[8]);
 
-    fprintf(stdout, "%d\n%d\n", xyCol.first, xyCol.second);
+    //fprintf(stdout, "%d\n%d\n", xyCol.first, xyCol.second);
 
     /* find way to only parse x, y header columns into vectors*/
 
@@ -50,31 +52,29 @@ int main(int argc, char *argv[]) {
     //boost::lockfree::queue<double> yy(numLines);
 
     //switch to lockfree queue when bugs are fixed
-    std::vector<Point*> allPoints;                          // this is what will be passed to run_Kmeans()
-    
+    std::vector<Point*> p;
     utils nUtility;
     std::ifstream inputFile(argv[1]);
     if (inputFile.is_open()) {
-        std::string headerLine;         //create variable for header line
-        nUtility.safeGetline(inputFile, headerLine);    //getline to remove header line in .csv
+        std::string headerLine;			//create variable for header line
+        nUtility.safeGetline(inputFile, headerLine);	//getline to remove header line in .csv
         std::string line;
         int pointID = 0;
         
         //#pragma omp parallel for default(none)
         while (!nUtility.safeGetline(inputFile, line).eof()) {
-            Point *ptr = new Point(pointID, headerLine, line);
+            Point *ptr = new Point(pointID, headerLine, line, xyCol);
             p.emplace_back(ptr);
             pointID++;
         }
     }
-    //DEBUG: Task Scheduler performing out of order operations in read from csv while loop
-    //instantiated new auto loop below to iterate through points in vector and set xy
-    for (auto&& v : p) {
-        v->setXY(xyCol);
-    }
-
     
+    //create clusters for #of clusters by creating kmeans obj
+    Kmeans *K = new Kmeans(num_clusters, num_iters);
+    K->run_Kmeans(p);
+    //K->printResults(p);
 
+    delete K;
 
     return 0;
 }

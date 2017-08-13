@@ -1,27 +1,43 @@
 /*
- * Cluster.hpp - Cluster class declaration
- */
+* Cluster.hpp - Cluster class declaration
+*/
 
 #ifndef CLUSTER_HPP
 #define CLUSTER_HPP
 
-#include <boost/lockfree/queue.hpp>     
-#include <utility>                      // need for type pair
+#include <iostream>
+#include <string>
+#include <utility>
 #include <vector>
+#include <boost/tokenizer.hpp>
+#include <boost/lockfree/queue.hpp>
+#include <boost/lexical_cast.hpp>
+#include "Point.hpp"
 
-class Cluster{
+//class Point;
+
+class Cluster {
 private:
-    std::pair<double, double> centroid;                                 // centroid is (x, y) value - center of Cluster
-    std::vector<Point*> clusterPoints;                                  // vector of pointers to Point objects - points currently in this Cluster
-    int clusterID;                                      
+    //Point;
+    std::pair<double, double> centroid;     // centroid is (x, y) value - center of Cluster
+    int clusterID;
 public:
-    Cluster(int n);                                                     // constructor
-    std::pair<double, double> getCentroid();                            // get current Centroid (x, y) value
-    int getClusterID();     
-    // double sumPoints(int choice);                                       // sum of point distances from a centroid in a Cluster
-    // double avgPoints(int choice);                                       // get avg distance of points from a centroid in a Cluster
-    // double getDistance(pair<double, double> a, pair<double, double> b); // get distance between two points
+    Cluster(int n);     // constructor
+    ~Cluster();                 
+
+    //setters
+    void setClusterID(int);
+    void setCentroid(double, double);
+
+    //getters
+    std::pair<double, double> getCentroid() const;    // get current Centroid (x, y) value
+    int getClusterID() const;
+    
+    //functions
+    //double sumPoints(int choice);   // sum of point distances from a centroid in a Cluster
+    //double avgPoints(int choice);   // get avg distance of points from a centroid in a Cluster
+    //double computeDistance(std::pair<double, double> a, std::pair<double, double> b); // get distance between two points
     // void Cluster::relocateCentroid();                                   // move Centroid based on mean of its current clusterPoints
-}
+};
 
 #endif
