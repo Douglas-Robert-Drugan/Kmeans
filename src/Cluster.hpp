@@ -20,10 +20,6 @@ class Cluster {
 private:
     //Point;
     std::pair<double, double> centroid;     // centroid is (x, y) value - center of Cluster
-<<<<<<< HEAD
-    std::vector<Point*> clusterPoints;      // vector of pointers to Point objects - points currently in this Cluster
-=======
->>>>>>> 454c708bffdbf0efd1ff19fbb638e4dbca06779b
     int clusterID;
 public:
     Cluster(int n);     // constructor
