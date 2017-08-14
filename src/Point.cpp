@@ -53,12 +53,21 @@ void Point::setXY(std::pair<int, int> xy_Cols)
     double x, y;    //to cast
     try {
         x = boost::lexical_cast<double>(this->pointData.childData.at(xy_Cols.first));
-        y = boost::lexical_cast<double>(this->pointData.childData.at(xy_Cols.second));
     }
     catch (const boost::bad_lexical_cast& e) {
         std::cout << "Exception Caught: " << e.what() << std::endl;
         std::cout << "x: " << this->pointData.childData.at(xy_Cols.first) << std::endl;
+        std::cout << "Setting to default: 0.0" << std::endl;
+        x = 0.0;
+    }
+    try {
+        y = boost::lexical_cast<double>(this->pointData.childData.at(xy_Cols.second));
+    }
+    catch (const boost::bad_lexical_cast& e) {
+        std::cout << "Exception Caught: " << e.what() << std::endl;
         std::cout << "y: " << this->pointData.childData.at(xy_Cols.second) << std::endl;
+        std::cout << "Setting to default: 0.0" << std::endl;
+        y = 0.0;
     }
     auto xyPair = std::make_pair(x,y);
     this->xy = xyPair;
