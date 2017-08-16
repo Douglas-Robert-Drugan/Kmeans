@@ -11,8 +11,8 @@
 #include <atomic>
 #include <boost/tokenizer.hpp>
 #include <boost/lockfree/queue.hpp>
-#include "Kmeans.hpp"
-#include "utils.hpp"
+#include "../lib/Kmeans.hpp"
+#include "../utils/utils.hpp"
 
 
 int main(int argc, char *argv[]) {

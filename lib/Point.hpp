@@ -11,7 +11,7 @@
 #include <utility>
 #include <vector>
 #include <string>
-#include "utils.hpp"
+#include "../utils/utils.hpp"
 
 class Point {
 private:
