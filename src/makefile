@@ -1,6 +1,5 @@
 CXX = g++
 CXXFLAGS = -g -std=c++11
-MPFLAGS = -lm -fopenmp
 
 OBJS = main.o Point.o utils.o Cluster.o Kmeans.o
 SRCS = main.cpp Point.cpp utils.cpp Cluster.cpp Kmeans.cpp
@@ -9,10 +8,7 @@ HEADERS = Point.hpp utils.hpp Cluster.hpp Kmeans.hpp
 all: main
 
 main: $(SRCS) $(HEADERS)
-		$(CXX) $(CXXFLAGS) $(SRCS) -o kmeansclustering $(MPFLAGS)
-
-#testSuite.o: testSuite.cpp
-#		$(CXX) $(CXXFLAGS) testSuite.cpp
+		$(CXX) $(CXXFLAGS) $(SRCS) -o kmeansclustering
 	   
 Point.o: Point.cpp
 		$(CXX) $(CXXFLAGS) Point.cpp
@@ -27,7 +23,7 @@ Kmeans.o: Kmeans.cpp
 		$(CXX) $(CXXFLAGS) Kmeans.cpp
         
 main.o: main.cpp
-		$(CXX) $(CXXFLAGS) main.cpp $(MPFLAGS)
+		$(CXX) $(CXXFLAGS) main.cpp
 		
 clean:
 		rm *o kmeansclustering

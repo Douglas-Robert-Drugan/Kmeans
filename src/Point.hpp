@@ -27,10 +27,7 @@ public:
     //reassign point may be trivial as we can get/set the point in other class
     //constructor
     Point(int, std::string, std::string, std::pair<int, int>);
-    //need trivial copy constructor for non locking objs
-    //Point(const Point &pObj);   //copy constructor fix implementation for parallel
-    //need trivial destructor
-    //~Point();
+
     //getters
     int getClusterId() const;
     std::vector<std::string> getHeaders() const;

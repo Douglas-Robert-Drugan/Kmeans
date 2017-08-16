@@ -8,20 +8,6 @@ Point::Point(int pid, std::string headerLine, std::string line, std::pair<int,in
     this->setXY(xyCols);
 }
 
-// fix for parallel pushing... 
-//not sure why boost does not like trivial constructor/destructor
-/*
-Point::Point(const Point & pObj)
-{
-    this->point_id = pObj.point_id;
-    this->pointData.headers = pObj.pointData.headers;
-    this->pointData.childData = pObj.pointData.childData;
-}
-Point::~Point()
-{
-}
-*/
-
 int Point::getClusterId() const
 {
     return this->cluster_id;
@@ -47,6 +33,13 @@ void Point::setClusterId(int cid)
     this->cluster_id = cid;
 }
 
+/***********************************************************************************
+**Function : setXY
+**Description : set the XY target values for a given point
+**Parameters : pair of int that reference x y cols in csv file
+**Pre-Conditions : 
+**Post-Conditions : point xy will contain data from respective xy col
+**********************************************************************************/
 void Point::setXY(std::pair<int, int> xy_Cols)
 {
     std::pair <double, double> xyData;  //store here
@@ -73,6 +66,13 @@ void Point::setXY(std::pair<int, int> xy_Cols)
     this->xy = xyPair;
 }
 
+/***********************************************************************************
+**Function : setHeaders
+**Description : set the header data of a given point
+**Parameters : header line
+**Pre-Conditions : null header data
+**Post-Conditions : point will have attribute identifiers (header data)
+**********************************************************************************/
 void Point::setHeaders(std::string hLine)
 {
     typedef boost::escaped_list_separator<char> Separator;
@@ -97,6 +97,14 @@ void Point::setData(std::string dLine)
     }
 }
 
+
+/***********************************************************************************
+**Function : printPointAttributes
+**Description : depending on implementation, can print attributes of a given point
+**Parameters : none
+**Pre-Conditions :
+**Post-Conditions :
+**********************************************************************************/
 void Point::printPointAttributes()
 {
     //at the moment this will not be human readable until we port to user interface

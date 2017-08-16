@@ -9,7 +9,7 @@
 **Description :
 **Parameters : int
 **Pre-Conditions :
-**Post-Conditions :
+**Post-Conditions : set cluster id
 **********************************************************************************/
 Cluster::Cluster(int n) {
 

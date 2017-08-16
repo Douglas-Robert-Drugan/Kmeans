@@ -33,11 +33,6 @@ public:
     std::pair<double, double> getCentroid() const;    // get current Centroid (x, y) value
     int getClusterID() const;
     
-    //functions
-    //double sumPoints(int choice);   // sum of point distances from a centroid in a Cluster
-    //double avgPoints(int choice);   // get avg distance of points from a centroid in a Cluster
-    //double computeDistance(std::pair<double, double> a, std::pair<double, double> b); // get distance between two points
-    // void Cluster::relocateCentroid();                                   // move Centroid based on mean of its current clusterPoints
 };
 
 #endif

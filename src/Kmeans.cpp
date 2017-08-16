@@ -9,7 +9,7 @@
 
 /***********************************************************************************
 **Function: Constructor
-**Description: initializes k and maxInterations
+**Description: initializes k and maxIterations
 **Parameters: int, int
 **Pre-Conditions: The parameters must be ints and must exist
 **Post-Conditions: Kmeans class object is initialized
@@ -204,9 +204,9 @@ bool Kmeans::reassignClusters(std::vector<Point*> p) {
 /***********************************************************************************
 **Function : assignPoints
 **Description : sets the point_id to the closest Cluster object's cluster_id
-**Parameters :
-**Pre-Conditions :
-**Post-Conditions :
+**Parameters : vector of points
+**Pre-Conditions : 
+**Post-Conditions : assigns points to cluster id based on distance from centroid
 **********************************************************************************/
 void Kmeans::assignPoints(std::vector<Point*> p) {
 
@@ -233,7 +233,7 @@ void Kmeans::assignPoints(std::vector<Point*> p) {
 **Description : get distance between two points using Euclidean distance squared
 **Parameters : pair<double, double> a, pair<double, double> b
 **Pre-Conditions :
-**Post-Conditions :
+**Post-Conditions : returns distance between two points xy coordinates
 **********************************************************************************/
 double Kmeans::computeDistance(std::pair<double, double> a, std::pair<double, double> b) {
 
@@ -294,19 +294,15 @@ void Kmeans::printResults(std::vector<Point*> points)
         std::cout << " Centroid " << ct << ": " << "ID:" << p-> getClusterID() << "\t" << p->getCentroid().first << "\t" << p->getCentroid().second << std::endl;
         ct++;
     }
-    //std::cout << "**POINT DATA**" << std::endl;
-    //for (const auto& p : points) {
-    //    std::cout << "Point Cluster ID: " << p->getClusterId(); 
-    //    std::cout << "\t" << "X: " << p->getXY().first << "\t" << "Y: " << p->getXY().second << std::endl;
-    //}
+
 }
 
 /***********************************************************************************
 **Function: run_Kmeans
 **Description:
 **Parameters: std::vector<Point*> dataPoints, int k
-**Pre-Conditions:
-**Post-Conditions:
+**Pre-Conditions: unclustered data
+**Post-Conditions: data organized by clusters based on mean dist from centroids
 **********************************************************************************/
 void Kmeans::run_Kmeans(std::vector<Point*> dataPoints) {
 
