@@ -27,10 +27,7 @@ Kmeans::Kmeans(int n, int max)
 
 /***********************************************************************************
 **Function: Destructor
-**Description:
-**Parameters:
-**Pre-Conditions:
-**Post-Conditions:
+**Description: delete each cluster in Kmeans
 **********************************************************************************/
 Kmeans::~Kmeans()
 {
@@ -43,8 +40,6 @@ Kmeans::~Kmeans()
 **Function : setClusters
 **Description : sets initial centroids which Clusters will form around. Use k-means++ method.
 **Parameters : std::vector<Point*> datapoints
-**Pre-Conditions :
-**Post-Conditions :
 **********************************************************************************/
 void Kmeans::setClusters(std::vector<Point*> p) {
 
@@ -119,9 +114,6 @@ void Kmeans::setMaxIterations(int n)
 
 /***********************************************************************************
 **Function : getK
-**Description : 
-**Parameters :
-**Pre-Conditions :
 **Post-Conditions : returns k, number of clusters
 **********************************************************************************/
 int Kmeans::getK() const
@@ -131,9 +123,6 @@ int Kmeans::getK() const
 
 /***********************************************************************************
 **Function : getMaxIterations
-**Description : 
-**Parameters :
-**Pre-Conditions :
 **Post-Conditions : returns maxIterations
 **********************************************************************************/
 int Kmeans::getMaxIterations() const
@@ -142,23 +131,9 @@ int Kmeans::getMaxIterations() const
 }
 
 /***********************************************************************************
-**Function : getCluster -- What is this function for? It's never used...
-**Description : 
-**Parameters :
-**Pre-Conditions :
-**Post-Conditions : 
-**********************************************************************************/
-Cluster * Kmeans::getCluster(int id) const
-{
-    return nullptr;
-}
-
-
-/***********************************************************************************
 **Function : reassignClusters
 **Description : moves a point to a different (closer) Cluster
-**Parameters :
-**Pre-Conditions :
+**Parameters : vector of points
 **Post-Conditions : returns True if even one centroid changed location.
 returns False if no centroids changed location.
 **********************************************************************************/
@@ -205,7 +180,6 @@ bool Kmeans::reassignClusters(std::vector<Point*> p) {
 **Function : assignPoints
 **Description : sets the point_id to the closest Cluster object's cluster_id
 **Parameters : vector of points
-**Pre-Conditions : 
 **Post-Conditions : assigns points to cluster id based on distance from centroid
 **********************************************************************************/
 void Kmeans::assignPoints(std::vector<Point*> p) {
@@ -232,7 +206,6 @@ void Kmeans::assignPoints(std::vector<Point*> p) {
 **Function : computeDistance
 **Description : get distance between two points using Euclidean distance squared
 **Parameters : pair<double, double> a, pair<double, double> b
-**Pre-Conditions :
 **Post-Conditions : returns distance between two points xy coordinates
 **********************************************************************************/
 double Kmeans::computeDistance(std::pair<double, double> a, std::pair<double, double> b) {
@@ -254,8 +227,6 @@ double Kmeans::computeDistance(std::pair<double, double> a, std::pair<double, do
 **Function : saveResults
 **Description : writes results of Kmeans to a .csv file
 **Parameters : std::vector<Point*> dataPoints
-**Pre-Conditions : none
-**Post-Conditions : 
 **********************************************************************************/
 void Kmeans::saveResults(std::vector<Point*> p){
 
@@ -282,8 +253,6 @@ void Kmeans::saveResults(std::vector<Point*> p){
 **Function : printResults
 **Description : prints Centroid locations and IDs; prints data point locations and IDs
 **Parameters : std::vector<Point*> dataPoints
-**Pre-Conditions : 
-**Post-Conditions : 
 **********************************************************************************/
 void Kmeans::printResults(std::vector<Point*> points)
 {
