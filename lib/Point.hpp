@@ -1,5 +1,5 @@
 /*
- *   Point HPP interface file for implementation in Point.cpp
+ *   Point.hpp - Point class declaration
  */
 #ifndef POINT_HPP
 #define POINT_HPP

@@ -16,7 +16,7 @@
 #include <vector>
 #include <random>
 #include <boost/tokenizer.hpp>
-#include <boost/lockfree/queue.hpp> //container still TBD
+#include <boost/lockfree/queue.hpp> 
 #include <boost/lexical_cast.hpp>
 #include "Cluster.hpp"
 
@@ -44,7 +44,7 @@ public:
     Cluster * getCluster(int id) const;
     
     //functions
-    void run_Kmeans(std::vector<Point*> dataPoints);                 // should be a very simple function
+    void run_Kmeans(std::vector<Point*> dataPoints);                
     bool reassignClusters(std::vector<Point*> p);                  // reassign centroids for each Cluster
     void assignPoints(std::vector<Point*> p);                               // assign a point to a Cluster 
     double computeDistance(std::pair<double, double> a, std::pair<double, double> b); // get distance between two points

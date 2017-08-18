@@ -19,6 +19,11 @@ Kmeans::Kmeans(int n, int max)
     this->setK(n);                    // set # of clusters
     this->setMaxIterations(max);      // set # of iterations -- can also be hardcoded
 
+    if (n < 1){
+        //then default to 3 clusters
+        n = 3;
+    }
+    
     for (int i = 0; i < n; i++) {                       // create Cluster objects
         Cluster *ptr = new Cluster(i + 1);            // cluster ID's set to 1-n
         this->clusterList.emplace_back(ptr);
@@ -87,11 +92,11 @@ void Kmeans::setClusters(std::vector<Point*> p) {
 **********************************************************************************/
 void Kmeans::setK(int n)
 {
-    if (n > 0){
-        k = n;
+    if (n < 1){
+        this->k = 3;    //set to default value of 3
     }
     else{
-        k = 3;      //set to default value of 3
+        this->k = n;
     }
 }
 
@@ -104,11 +109,11 @@ void Kmeans::setK(int n)
 **********************************************************************************/
 void Kmeans::setMaxIterations(int n)
 {
-    if (n > 0){
-        this->maxIterations = n;
+    if (n < 1){
+        this->maxIterations = 10;       //set to default value of 10
     }
     else{
-        this->maxIterations = 10;      //set to default value of 10
+        this->maxIterations = n;
     }
 }
 
@@ -191,12 +196,12 @@ void Kmeans::assignPoints(std::vector<Point*> p) {
         for (auto&& t : clusterList) {                              // for t in ClusterList (t is a Cluster object)
             distance = computeDistance(v->getXY(), t->getCentroid());         // calculate distance
             if (distance == 0) {                                      // point IS a centroid
-                v->setClusterId(t->getClusterID());                       // should I be using setters and getters here?
+                v->setClusterId(t->getClusterID());                   
                 break;                                              // only want to break from inner loop
             }
             else if (distance < minDistance) {
                 minDistance = distance;                             // set minDistance
-                v->setClusterId(t->getClusterID());                       // should I be using setters and getters here?
+                v->setClusterId(t->getClusterID());                 
             }
         }
     }
@@ -218,7 +223,6 @@ double Kmeans::computeDistance(std::pair<double, double> a, std::pair<double, do
     yDistance = a.second - b.second;
 
     distance = pow(xDistance, 2) + pow(yDistance, 2);
-    // do not take sqrt to save time, but we can if we want to
 
     return distance;
 }
@@ -294,7 +298,6 @@ void Kmeans::run_Kmeans(std::vector<Point*> dataPoints) {
         count--;
     }
 
-    //added 8/9/17 for to use with d3 for making graph
     saveResults(dataPoints);
     
     printResults(dataPoints);
